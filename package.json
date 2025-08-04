@@ -1,0 +1,27 @@
+{
+  "name": "counterstrikemapdecider",
+  "version": "1.0.0",
+  "main": "index.js",
+  "bin": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "pkg . --targets node18-win-x64"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Chris-Merced/CounterStrikeMapDecider.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Chris-Merced/CounterStrikeMapDecider/issues"
+  },
+  "homepage": "https://github.com/Chris-Merced/CounterStrikeMapDecider#readme",
+  "description": "",
+  "devDependencies": {
+    "eslint": "^8.57.1",
+    "prettier": "^3.6.2",
+    "prettier-eslint": "^16.4.2"
+  }
+}
