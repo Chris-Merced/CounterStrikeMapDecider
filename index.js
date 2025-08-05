@@ -1,7 +1,8 @@
-const friends = require("./friends.json");
-const maps = require("./maps.json");
+const maps = require("./src/data/maps.json");
+const addDeleteFriends = require("./menuOptions/addDeleteFriends");
+const askUser = require("./input");
 
-function main() {
+async function main() {
   try {
     let trimmed = "default";
 
@@ -10,20 +11,27 @@ function main() {
     console.log(" ------------------------------------");
     console.log("| Counter Strike Map List Generator  |");
     console.log(" ------------------------------------");
-    displayMenu();
+    let running = true;
 
-    process.stdin.on("data", (input) => {
-      trimmed = input.trim();
+    while (running) {
+      displayMenu();
 
-      switch (trimmed) {
+      let choice = await askUser();
+
+      switch (choice) {
         case "3":
+          await addDeleteFriends.options();
+          break;
+        case "4":
           process.exit();
+          break;
         default:
-          console.log(trimmed);
+          console.log(
+            "Please Select a Menu Option by pressing a number then Enter",
+          );
           break;
       }
-    });
-
+    }
     process.stdin.on("error", (err) => {
       console.log("A huge ooopsie poopsie has occured");
       console.error(err);
@@ -45,7 +53,8 @@ function displayMenu() {
   console.log("Select Your Option: ");
   console.log("1. Generate List");
   console.log("2. Modify Map Preferences");
-  console.log("3. Exit");
+  console.log("3. Add/Delete Friends");
+  console.log("4. Exit");
   console.log("");
 }
 
