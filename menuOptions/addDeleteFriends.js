@@ -14,18 +14,18 @@ async function options() {
           "Select [A]dd Friend, [D]elete Friend or [E]xit \n",
         );
 
-        switch (choice) {
-          case "A":
+        switch (choice.toLowerCase()) {
+          case "a":
             await addFriend();
             resolve();
             return;
             break;
-          case "D":
+          case "d":
             await deleteFriend();
             resolve();
             return;
             break;
-          case "E":
+          case "e":
             resolve();
             return;
             break;
@@ -57,13 +57,13 @@ async function addFriend() {
           friend = await askUser("Input friend name: ");
           continue;
         }
-        switch (verification) {
-          case "Y":
+        switch (verification.toLowerCase()) {
+          case "y":
             //add friend
-            friends[friend.toLowerCase] = maps;
+            friends[friend.toLowerCase()] = maps;
             console.log(friends);
             fs.writeFileSync(
-              "friends.json",
+              "./src/data/friends.json",
               JSON.stringify(friends, null, 2),
               "utf-8",
             );
@@ -71,9 +71,14 @@ async function addFriend() {
             resolve();
             correct = true;
             break;
-          case "N":
+          case "n":
             friend = await askUser("Input friend name: ");
             break;
+          case "e": {
+            resolve();
+            return;
+            break;
+          }
           default:
             console.log("Please Enter [Y]es or [N]o");
             break;
@@ -86,6 +91,26 @@ async function addFriend() {
   });
 }
 
-async function deleteFriend() {}
+async function deleteFriend() {
+  try {
+    const input = await askUser("What friend would you like to delete? ");
+    const friend = input.toLowerCase();
+
+    if (friends[friend]) {
+      delete friends[friend];
+      fs.writeFileSync(
+        "./src/data/friends.json",
+        JSON.stringify(friends, null, 2),
+        "utf-8",
+      );
+      console.log("Friend Deleted :(");
+    } else {
+      console.log("That friend does not exist");
+    }
+  } catch (err) {
+    console.log("There was an error in deleting a friend: " + err);
+    return;
+  }
+}
 
 module.exports = { options, addFriend, deleteFriend };
