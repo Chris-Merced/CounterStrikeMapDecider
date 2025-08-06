@@ -53,15 +53,6 @@
     "Overpass",
     "Train"
   ],
-  "tim": [
-    "Ancient",
-    "Dust II",
-    "Inferno",
-    "Mirage",
-    "Nuke",
-    "Overpass",
-    "Train"
-  ],
   "tyler": [
     "Ancient",
     "Dust II",
@@ -72,6 +63,15 @@
     "Train"
   ],
   "yak": [
+    "Ancient",
+    "Dust II",
+    "Inferno",
+    "Mirage",
+    "Nuke",
+    "Overpass",
+    "Train"
+  ],
+  "tim": [
     "Ancient",
     "Dust II",
     "Inferno",

@@ -59,9 +59,7 @@ async function addFriend() {
         }
         switch (verification.toLowerCase()) {
           case "y":
-            //add friend
             friends[friend.toLowerCase()] = maps;
-            console.log(friends);
             fs.writeFileSync(
               "./src/data/friends.json",
               JSON.stringify(friends, null, 2),
