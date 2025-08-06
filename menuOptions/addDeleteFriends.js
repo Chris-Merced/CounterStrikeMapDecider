@@ -1,5 +1,7 @@
 const friends = require("../src/data/friends.json");
+const maps = require("../src/data/maps.json");
 const askUser = require("../input");
+const fs = require("fs");
 
 async function options() {
   return new Promise(async (resolve) => {
@@ -50,10 +52,22 @@ async function addFriend() {
         const verification = await askUser(
           `${friend} - Is this correct? (Y/N)`,
         );
-
+        if (friends[friend.toLowerCase()]) {
+          console.log("That friend already exists");
+          friend = await askUser("Input friend name: ");
+          continue;
+        }
         switch (verification) {
           case "Y":
             //add friend
+            friends[friend.toLowerCase] = maps;
+            console.log(friends);
+            fs.writeFileSync(
+              "friends.json",
+              JSON.stringify(friends, null, 2),
+              "utf-8",
+            );
+            console.log("Friend added!");
             resolve();
             correct = true;
             break;
@@ -68,31 +82,6 @@ async function addFriend() {
     } catch (err) {
       console.log("Error adding friend: " + err.message);
       return;
-    }
-  });
-}
-
-async function verifyAddInput(friend) {
-  let choice = null;
-
-  process.stdin.once("data", (input) => {
-    choice = input.trim();
-
-    try {
-      switch (choice) {
-        case "Y":
-          console.log("Friend has been added");
-          //add to friends
-          break;
-        case "N":
-          addFriend();
-          break;
-        default:
-          console.log("Please Select an Option by Entering Y or N then Enter");
-      }
-    } catch (err) {
-      console.log("Error in Verifying user input: " + err.message);
-      options();
     }
   });
 }
